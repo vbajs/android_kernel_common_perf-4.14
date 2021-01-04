@@ -1801,6 +1801,7 @@ SYSCALL_DEFINE2(umount, char __user *, name, int, flags)
 	int lookup_flags = 0;
 	bool user_request = !(current->flags & PF_KTHREAD);
 
+	// basic validity checks done first
 	if (flags & ~(MNT_FORCE | MNT_DETACH | MNT_EXPIRE | UMOUNT_NOFOLLOW))
 		return -EINVAL;
 
