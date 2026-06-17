@@ -45,7 +45,7 @@ compile_kernel() {
   echo -e "\nStarting compilation..."
   
   # 1. Make the base defconfig
-  make O=out ARCH=arm64 vendor/sdmsteppe-perf_defconfig vendor/sweet.config
+  make O=out ARCH=arm64 vendor/sdmsteppe-perf_defconfig vendor/sweet.config ReSKSU.config NoMount.config
 
   # 3. Run the main build
   make -j$(nproc --all) \
