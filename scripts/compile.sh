@@ -21,10 +21,16 @@ setup_environment() {
 setup_clang() {
   echo "Setting up Clang..."
 
+CLANG_URL=$(curl -s https://api.github.com/repos/bachnxuan/aosp_clang_mirror/releases/latest | \
+             grep "browser_download_url" | \
+             head -n 1 | \
+             cut -d '"' -f 4)
+
   # Setup Clang
   if [ ! -d "$PWD/clang" ]; then
     echo "Cloning Clang..."
-    git clone https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379.git --depth=1 -b 15.0 clang
+    curl -L -O "$CLANG_URL"
+    mkdir clang && tar -C clang -xf clang-*.tar.gz
   else
     echo "Local clang dir found, using it."
   fi
